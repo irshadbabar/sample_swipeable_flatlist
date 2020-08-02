@@ -14,7 +14,7 @@
 
 const Data = [];
 
-for (let index = 1; index < 110; index++) {
+for (let index = 1; index < 10; index++) {
     
     Data.push({id:index,text:'Item '+index})
 

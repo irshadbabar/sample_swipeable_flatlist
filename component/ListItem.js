@@ -23,7 +23,7 @@ export default class ListItem extends Component {
       onMoveShouldSetResponder: () => true,
       onMoveShouldSetPanResponderCapture: (evt, gestureState) => {
         const {dx, dy} = gestureState;
-        if (dx > 2 || dx < -2 || dy > 5 || dy < -5) {
+        if (dx > 5 || dx < -5 || dy > 10 || dy < -10) {
           return true;
         } else {
           return false;
@@ -50,7 +50,7 @@ export default class ListItem extends Component {
       this.refs['task'].setNativeProps({style: {transform: [{translateX: 0}]}});
     }
     if (Math.abs(gestureState.dx) >= Dimensions.get('window').width / 2) {
-        LayoutAnimation.configureNext(LayoutAnimation.create(2000,'easeInEaseOut','opacity'));
+        LayoutAnimation.configureNext(LayoutAnimation.create(500,'easeInEaseOut','opacity'));
       this.refs['task'].setNativeProps({
         style: {transform: [{translateX: Dimensions.get('window').width}]},
       });
@@ -65,30 +65,49 @@ export default class ListItem extends Component {
   }
   render() {
     return (
-      <TouchableHighlight onPress={() => this.onClick(this.props.item.id)} underlayColor="white">
+      //<TouchableHighlight /*onPress={() => this.onClick(this.props.item.id)}*/ underlayColor="white">
       <View>
         <View style={styles.absolute}>
           <Text style={[styles.textBold, {marginHorizontal: 10}]}> Delete</Text>
           <Text style={[styles.textBold, {marginHorizontal: 10}]}> Delete</Text>
         </View>
-        <Animated.View  ref="task" style={styles.item} {...this.PanResponder.panHandlers}>
-          <Text  style={[styles.text, {flex: 1}]}>{this.props.item.text}</Text>
-          <TouchableOpacity>
-            <View style={styles.menu}></View>
-            <View style={styles.menu}></View>
-            <View style={styles.menu}></View>
-          </TouchableOpacity>
+        <Animated.View  ref="task" style={styles.item}  {...this.PanResponder.panHandlers}>
+
+         <View style={styles.itemContactMessage}>
+           <Text  style={styles.textContact}>{"Irshad Babar"}</Text>
+           <Text  style={styles.textMessage}>{"Hello Irshad, How are you?"}</Text>
+         </View>
+
+        <View style={styles.itemDateTime}>
+          <Text  style={styles.textDate}>{"08-Jul-2016"}</Text>
+          <Text  style={styles.textTime}>{"05:09 PM"}</Text>
+        </View>
+         
+         
+          
         </Animated.View>
       </View>
-      </TouchableHighlight>
+      //</TouchableHighlight>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  item: {
+
+  item:{
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    backgroundColor: 'white',
+    justifyContent:'space-between'
+  },
+  itemContactMessage: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    backgroundColor: 'white',
+  },
+  itemDateTime:{
+    flexDirection: 'column',
+    alignItems: 'flex-start',
     backgroundColor: 'white',
   },
   absolute: {
@@ -100,11 +119,46 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     flexDirection: 'row',
   },
+  textContact: {
+    marginVertical: 10,
+    marginHorizontal: 10,
+    
+    fontSize: 18,
+    fontWeight:'600',
+    marginLeft: 10,
+    
+  },
+  textMessage: {
+    marginVertical: 5,
+    marginHorizontal: 5,
+    fontSize: 14,
+    fontWeight: '100',
+    marginLeft: 10,
+    
+  },
+  textDate: {
+    marginVertical: 5,
+    marginHorizontal: 5,
+    fontSize: 14,
+    fontWeight: '100',
+    marginLeft: 10,
+    
+  },
+  textTime: {
+    marginVertical: 5,
+    marginHorizontal: 5,
+    fontSize: 14,
+    fontWeight: '100',
+    marginLeft: 10,
+    
+  },
   text: {
-    marginVertical: 20,
+    marginVertical: 5,
+    marginHorizontal: 5,
     fontSize: 20,
     fontWeight: 'bold',
     marginLeft: 10,
+    
   },
   menu: {
     width: 20,
