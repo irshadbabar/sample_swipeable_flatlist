@@ -65,7 +65,7 @@ export default class ListItem extends Component {
   }
   render() {
     return (
-      //<TouchableHighlight /*onPress={() => this.onClick(this.props.item.id)}*/ underlayColor="white">
+      <TouchableHighlight onPress={() => this.onClick(this.props.item.id)} underlayColor="white">
       <View>
         <View style={styles.absolute}>
           <Text style={[styles.textBold, {marginHorizontal: 10}]}> Delete</Text>
@@ -87,7 +87,7 @@ export default class ListItem extends Component {
           
         </Animated.View>
       </View>
-      //</TouchableHighlight>
+      </TouchableHighlight>
     );
   }
 }
